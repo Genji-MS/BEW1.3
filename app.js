@@ -1,12 +1,37 @@
 // Initialize express
 const express = require('express')
 const app = express()
+// INITIALIZE BODY-PARSER AND ADD IT TO APP
+const bodyParser = require('body-parser');
+const models = require('./db/models');
+
+// The following line must appear AFTER const app = express() and before your routes!
+app.use(bodyParser.urlencoded({ extended: true }));
+
 
 // INDEX
 app.get('/', (req, res) => {
-  //res.send('Hello Peanut!')
-  //res.render('home', { msg: 'Handlebars are Cool!' });
-  res.render('events-index', { events: events });
+    //res.send('Hello Peanut!')
+    //res.render('home', { msg: 'Handlebars are Cool!' });
+    //res.render('events-index', { events: events });
+    //models.Event.findAll().then(events => {
+    //models.Event.findAll({ order: [['createdAt', 'DESC']] }).then(events => {
+        res.render('events-index', { events: events });
+    //})
+})
+
+// Create
+app.get('/events/new', (req, res) => {
+    res.render('events-new', {});
+})
+// Recieve info from CREATE
+app.post('/events', (req, res) => {
+    //console.log(req.body);
+    models.Event.create(req.body).then(event => {
+        res.redirect(`/`);
+    }).catch((err) => {
+        console.log(err)
+    });
 })
 
 // OUR MOCK ARRAY OF PROJECTS
