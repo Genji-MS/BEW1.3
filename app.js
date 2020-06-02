@@ -15,9 +15,9 @@ app.get('/', (req, res) => {
     //res.render('home', { msg: 'Handlebars are Cool!' });
     //res.render('events-index', { events: events });
     //models.Event.findAll().then(events => {
-    //models.Event.findAll({ order: [['createdAt', 'DESC']] }).then(events => {
+    models.Event.findAll({ order: [['createdAt', 'DESC']] }).then(events => {
         res.render('events-index', { events: events });
-    //})
+    })
 })
 
 // Create
