@@ -1,5 +1,6 @@
 // Initialize express
 const express = require('express')
+const methodOverride = require('method-override')
 const app = express()
 // INITIALIZE BODY-PARSER AND ADD IT TO APP
 const bodyParser = require('body-parser');
@@ -7,6 +8,8 @@ const models = require('./db/models');
 
 // The following line must appear AFTER const app = express() and before your routes!
 app.use(bodyParser.urlencoded({ extended: true }));
+// override with POST having ?_method=DELETE or ?_method=PUT
+app.use(methodOverride('_method'))
 
 
 // INDEX
@@ -19,7 +22,6 @@ app.get('/', (req, res) => {
         res.render('events-index', { events: events });
     })
 })
-
 // Create
 app.get('/events/new', (req, res) => {
     res.render('events-new', {});
@@ -35,8 +37,7 @@ app.post('/events', (req, res) => {
         console.log(err)
     });
 })
-
-// SHOW
+// Read one
 app.get('/events/:id', (req, res) => {
     //res.send('I\'m an event')
     // Search for the event by its id that was passed in via req.params
@@ -47,6 +48,26 @@ app.get('/events/:id', (req, res) => {
       // if they id was for an event not in our db, log an error
       console.log(err.message);
     })
+});
+// EDIT
+app.get('/events/:id/edit', (req, res) => {
+    models.Event.findByPk(req.params.id).then((event) => {
+      res.render('events-edit', { event: event });
+    }).catch((err) => {
+      console.log(err.message);
+    })
+});
+// UPDATE
+app.put('/events/:id', (req, res) => {
+    models.Event.findByPk(req.params.id).then(event => {
+      event.update(req.body).then(event => {
+        res.redirect(`/events/${req.params.id}`);
+      }).catch((err) => {
+        console.log(err);
+      });
+    }).catch((err) => {
+      console.log(err);
+    });
 });
 
 // OUR MOCK ARRAY OF PROJECTS
