@@ -4,16 +4,23 @@
     "password": null,
     "database": "any-db",
     "host": "127.0.0.1",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "operatorsAliases": false
   },
   "test": {
     "username": null,
     "password": null,
-    "database": "any-db-test",
+    "database": "any-db_test",
     "host": "127.0.0.1",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "operatorsAliases": false
   },
   "production": {
-    "use_env_variable": "PROD_DATABASE_URL"
+    "username": null,
+    "password": null,
+    "database": "any-db_production",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "operatorsAliases": false
   }
- }
+}
