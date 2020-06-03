@@ -11,9 +11,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // override with POST having ?_method=DELETE or ?_method=PUT
 app.use(methodOverride('_method'))
 
+require('./controllers/events')(app, models);
 
 // INDEX
-app.get('/', (req, res) => {
+/*app.get('/', (req, res) => {
     //res.send('Hello Peanut!')
     //res.render('home', { msg: 'Handlebars are Cool!' });
     //res.render('events-index', { events: events });
@@ -77,14 +78,14 @@ app.delete('/events/:id', (req, res) => {
     }).catch((err) => {
       console.log(err);
     });
-})
+})*/
 
 // OUR MOCK ARRAY OF PROJECTS
-var events = [
+/*var events = [
     { title: "I am your first event", desc: "A great event that is super fun to look at and good", imgUrl: "https://img.purch.com/w/660/aHR0cDovL3d3dy5saXZlc2NpZW5jZS5jb20vaW1hZ2VzL2kvMDAwLzA4OC85MTEvb3JpZ2luYWwvZ29sZGVuLXJldHJpZXZlci1wdXBweS5qcGVn" },
     { title: "I am your second event", desc: "A great event that is super fun to look at and good", imgUrl: "https://img.purch.com/w/660/aHR0cDovL3d3dy5saXZlc2NpZW5jZS5jb20vaW1hZ2VzL2kvMDAwLzA4OC85MTEvb3JpZ2luYWwvZ29sZGVuLXJldHJpZXZlci1wdXBweS5qcGVn" },
     { title: "I am your third event", desc: "A great event that is super fun to look at and good", imgUrl: "https://img.purch.com/w/660/aHR0cDovL3d3dy5saXZlc2NpZW5jZS5jb20vaW1hZ2VzL2kvMDAwLzA4OC85MTEvb3JpZ2luYWwvZ29sZGVuLXJldHJpZXZlci1wdXBweS5qcGVn" }
-  ]
+  ]*/
 
 
 // require handlebars
