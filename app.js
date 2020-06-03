@@ -28,11 +28,26 @@ app.get('/events/new', (req, res) => {
 app.post('/events', (req, res) => {
     //console.log(req.body);
     models.Event.create(req.body).then(event => {
-        res.redirect(`/`);
+        //res.redirect(`/`);
+        // Redirect to events/:id
+        res.redirect(`/events/${event.id}`)
     }).catch((err) => {
         console.log(err)
     });
 })
+
+// SHOW
+app.get('/events/:id', (req, res) => {
+    //res.send('I\'m an event')
+    // Search for the event by its id that was passed in via req.params
+    models.Event.findByPk(req.params.id).then((event) => {
+      // If the id is for a valid event, show it
+      res.render('events-show', { event: event })
+    }).catch((err) => {
+      // if they id was for an event not in our db, log an error
+      console.log(err.message);
+    })
+});
 
 // OUR MOCK ARRAY OF PROJECTS
 var events = [
