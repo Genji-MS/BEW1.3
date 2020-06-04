@@ -16,11 +16,13 @@
     "operatorsAliases": false
   },
   "production": {
-    "username": null,
-    "password": null,
-    "database": "any-db_production",
-    "host": "127.0.0.1",
-    "dialect": "mysql",
-    "operatorsAliases": false
+    "use_env_variable": "DATABASE_URL",
+    "dialect": "postgres",
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    }
   }
 }
