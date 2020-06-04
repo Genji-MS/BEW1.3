@@ -5,13 +5,13 @@ const app = express()
 // INITIALIZE BODY-PARSER AND ADD IT TO APP
 const bodyParser = require('body-parser');
 const models = require('./db/models');
-const handlebars = require('handlebars');
-const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-access');
+//const handlebars = require('handlebars');
+//const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-access');
 const exphbs = require('express-handlebars');
-const hbs = exphbs.create({
+/*const hbs = exphbs.create({
     defaultLayout: 'main',
     handlebars: allowInsecurePrototypeAccess(handlebars),
-});
+});*/
 
 // The following line must appear AFTER const app = express() and before your routes!
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -97,7 +97,7 @@ app.delete('/events/:id', (req, res) => {
 
 // require handlebars
 // Use "main" as our default layout
-app.engine('handlebars', hbs.engine);
+app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 // Use handlebars to render
 app.set('view engine', 'handlebars');
 
