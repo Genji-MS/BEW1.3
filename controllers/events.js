@@ -27,12 +27,14 @@ module.exports = function (app, models) {
     app.get('/events/:id', (req, res) => {
         //res.send('I\'m an event')
         // Search for the event by its id that was passed in via req.params
-        models.Event.findByPk(req.params.id).then((event) => {
+        //models.Event.findByPk(req.params.id).then((event) => {
+        //show RSVP infos
+        models.Event.findByPk(req.params.id, { include: [{ model: models.Rsvp }] }).then(event => {
         // If the id is for a valid event, show it
-        res.render('events-show', { event: event })
+            res.render('events-show', { event: event })
         }).catch((err) => {
         // if they id was for an event not in our db, log an error
-        console.log(err.message);
+            console.log(err.message);
         })
     });
     // EDIT

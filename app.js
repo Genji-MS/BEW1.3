@@ -19,6 +19,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'))
 
 require('./controllers/events')(app, models);
+require('./controllers/rsvps')(app, models);
 
 // INDEX
 /*app.get('/', (req, res) => {
