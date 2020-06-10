@@ -1,4 +1,5 @@
 //events.js
+const moment = require("moment");
 
 module.exports = function (app, models) {
 
@@ -14,7 +15,7 @@ module.exports = function (app, models) {
     })
     // Recieve info from CREATE
     app.post('/events', (req, res) => {
-        //console.log(req.body);
+        console.log(req.body);
         models.Event.create(req.body).then(event => {
             //res.redirect(`/`);
             // Redirect to events/:id
